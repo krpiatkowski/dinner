@@ -1,0 +1,50 @@
+{
+  "name": "server",
+  "main": "index.js",
+  "version": "0.0.1",  
+  "dependencies": {
+    "body-parser": "1.17.2",
+    "express": "4.15.3",
+    "request": "2.81.0",
+    "request-promise-native": "1.0.4",
+    "async-file": "2.0.2",
+    "dotenv": "4.0.0",
+    "joi": "10.4.1",
+    "express-joi-validation": "0.1.0",
+    "jsonwebtoken": "7.1.9",
+    "knex": "0.13.0",
+    "pg": "6.1.0",
+    "log4js": "2.3.1",
+    "knex-tiny-logger": "1.0.4"
+  },
+  "devDependencies": {
+    "@types/express": "4.0.37",
+    "@types/joi": "10.4.3",
+    "@types/knex": "0.0.61",
+    "@types/node": "8.0.32",
+    "@types/request-promise-native": "^1.0.6",
+    "chai": "*",
+    "chai-http": "3.0.0",
+    "factory-girl": "4.0.0-beta.7",
+    "mocha": "*",
+    "mockery": "2.1.0",
+    "nodemon": "1.12.1",
+    "npm-run-all": "4.1.1",
+    "ts-node": "3.3.0",
+    "tslint": "5.7.0",
+    "typescript": "2.5.3"
+  },
+  "scripts": {
+    "server": "ts-node ./app/index.ts",
+    "startDB": "pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log restart",
+    "start": "npm-run-all startDB dev:watch",
+    "dev:watch": "nodemon -e ts -w src -x npm run dev:server",
+    "dev:server": "ts-node --inspect ./src/index.ts"
+  },
+  "standard": {
+    "globals": [
+      "include",
+      "includeTest"
+    ]
+  }
+}

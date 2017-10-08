@@ -1,0 +1,30 @@
+{
+    "version": "0.1.0",
+    "tasks": [
+        {
+            "taskName": "tswatch",
+            "command": "node",
+            "isShellCommand": true,
+            "args": [
+                "${workspaceRoot}/node_modules/typescript/bin/tsc",
+                "--watch",
+                "-p",
+                "${workspaceRoot}"
+            ],
+            "suppressTaskName": true,
+            "isBackground": true,
+            "isBuildCommand": true,
+            "problemMatcher": "$tsc-watch"
+        },
+        {
+            "taskName": "tslint",
+            "command": "npm",
+            "showOutput": "never",
+            "args": [
+                "run",
+                "lint"                
+            ],
+            "problemMatcher": "$tslint5"
+        }
+    ]
+}
