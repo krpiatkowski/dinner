@@ -2,15 +2,9 @@ import * as Knex from "knex"
 import knexTinyLogger from "knex-tiny-logger"
 import { databaseLogger } from "./logger"
 
-let config = {
-    client: "pg",
-    connection: process.env.DATABASE_URL,
-    migrations: {
-        directory: "src/migrations"
-    }
-}
+let config = require("../knexfile.js")
 
-const instance = Knex(config)
+const instance = Knex(process.env.NODE_ENV !== "production" ? config.development : config.production)
 knexTinyLogger(instance, {
     logger: (log: String, duration: String, query: String) => {
         databaseLogger.debug(duration, query)

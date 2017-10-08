@@ -40,11 +40,5 @@
     "start": "npm-run-all startDB dev:watch",
     "dev:watch": "nodemon -e ts -w src -x npm run dev:server",
     "dev:server": "ts-node --inspect ./src/index.ts"
-  },
-  "standard": {
-    "globals": [
-      "include",
-      "includeTest"
-    ]
   }
 }
