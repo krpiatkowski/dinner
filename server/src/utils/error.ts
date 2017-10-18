@@ -1,20 +1,27 @@
 export default class ServerError {
-    readonly message: String
-    constructor(message: String = "") {
-        this.message = message
+    readonly status: number
+    readonly message: string
+    readonly stack: string
+    constructor(status: number, error: Error) {
+        this.status = status
+        this.message = error.toString()
+        this.stack = error.stack
     }
 }
 
-export class NotFound extends ServerError { }
-export class Internal extends ServerError { }
-export class BadGateway extends ServerError { }
+export class NotFound extends ServerError { 
+    constructor(error: Error) {
+        super(404, error)
+    }
+}
+export class Internal extends ServerError { 
+    constructor(error: Error) {
+        super(500, error)
+    }
+}
 
-export const exceptionWrapper = fn => (...args) => fn(...args).catch(args[2])
-
-export const errorHandler = (err:any, res:any) => {
-    if (err instanceof NotFound) {
-        res.status(404).json(err.message)
-    } else {
-        res.status(500)
+export class BadGateway extends ServerError { 
+    constructor(error: Error) {
+        super(502, error)
     }
 }

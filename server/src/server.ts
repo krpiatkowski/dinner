@@ -7,6 +7,7 @@ import { validationHandler } from "./utils/validator"
 import Recipe from "./routes/recipe"
 
 const server = express()
+server.use(bodyParser.urlencoded({ extended: true }))
 server.use(bodyParser.json())
 server.use(Log4js.connectLogger(requestLogger, { level: Log4js.levels.INFO, format: ":status :method :url" }))
 

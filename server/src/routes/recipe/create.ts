@@ -1,4 +1,4 @@
-import { Request, Response } from "express"
+import { Request, Response, NextFunction} from "express"
 import * as Joi from "joi"
 
 import validator from "../../utils/validator"
@@ -7,14 +7,14 @@ import database from "../../database"
 
 export default [
     validator.body(Joi.object({
-        name: Joi.string().min(3).required()
+        name: Joi.string().min(3).required()    
     })),
-    async (req: Request, res: Response) => {
+    async (req: Request, res: Response, next: NextFunction) => {
         try {
             let recipe = await database.insert(req.body)
             res.json(recipe)
         } catch (ex) {
-            throw new Internal(ex)
+            next(new Internal(ex)) 
         }
     }
 ]
