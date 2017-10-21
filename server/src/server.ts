@@ -13,6 +13,8 @@ server.use(Log4js.connectLogger(requestLogger, { level: Log4js.levels.INFO, form
 
 server.post("/recipes", Recipe.create)
 server.get("/recipes", Recipe.list)
+server.put("/recipes", Recipe.update)
+server.delete("/recipes", Recipe.del)
 
 server.use(validationHandler)
 

@@ -1,7 +1,7 @@
 exports.up = (knex, Promise) => {
     return knex.schema.createTable('recipes', (table) => {
-        table.uuid('id').primary()
-        table.string('name')
+        table.uuid('id').primary().defaultTo(knex.raw('uuid_generate_v4()'))
+        table.string('name').unique()
     })
 }
 

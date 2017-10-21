@@ -11,7 +11,7 @@ export default [
     })),
     async (req: Request, res: Response, next: NextFunction) => {
         try {
-            let recipe = await database.insert(req.body)
+            let recipe = await database("recipes").insert(req.body, ["id", "name"])
             res.json(recipe)
         } catch (ex) {
             next(new Internal(ex)) 
